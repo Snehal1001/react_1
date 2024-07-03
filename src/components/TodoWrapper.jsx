@@ -18,9 +18,9 @@ export function TodoWrapper() {
   return (
     <div className="TodoWrapper">
       <TodoForm addTodo={addTodo} />
-      {todoTasks.map((task, index) => 
+      {todoTasks.map((task) => 
         <Todo
-          task={task.task} key={index}
+          task={task.task} id={task.id} completed={task.completed} isEditing={task.isEditing} key={task.id}
         />
       )}
     </div>
