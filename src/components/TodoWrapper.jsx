@@ -5,28 +5,24 @@ import { Todo } from "./Todo";
 
 // uuidv4();
 
-export const TodoWrapper = () => {
+export function TodoWrapper() {
   const [todoTasks, setTodoTasks] = useState([]);
 
-  const addTodo = (todo) => {
-    console.log('todo', todo);
+  const addTodo = (task) => {
     setTodoTasks([
       ...todoTasks,
-      { id: uuidv4(), task: todo, completed: false, isEditing: false },
+      { id: uuidv4(), task: task, completed: false, isEditing: false },
     ]);
-
-    console.log(todoTasks);
   };
 
   return (
     <div className="TodoWrapper">
       <TodoForm addTodo={addTodo} />
-      {todoTasks.map((task, index) => {
-        <Todo 
-        // task={todo} key={index}
-         />
-      })}
-      <Todo />
+      {todoTasks.map((task, index) => 
+        <Todo
+          task={task.task} key={index}
+        />
+      )}
     </div>
   );
 };
