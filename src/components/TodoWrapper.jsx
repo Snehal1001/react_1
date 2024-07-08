@@ -15,12 +15,23 @@ export function TodoWrapper() {
     ]);
   };
 
+  const completeTask = (id) => {
+    console.log(id);
+    setTodoTasks(
+      todoTasks.map((task) => task.id === id ? { ...task, completed: !task.completed } : task)
+    );
+  }
+
+  const editTask = (id) => {
+    
+  }
+
   return (
     <div className="TodoWrapper">
       <TodoForm addTodo={addTodo} />
       {todoTasks.map((task) => 
-        <Todo
-          task={task.task} id={task.id} completed={task.completed} isEditing={task.isEditing} key={task.id}
+      <Todo
+          task={task} key={task.id} completeTask={completeTask} editTask={editTask}
         />
       )}
     </div>

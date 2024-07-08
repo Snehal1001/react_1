@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export function Todo({id, task, completed, isEditing}) {
+export function Todo({task, deleteTask, editTask, completeTask}) {
+  const editTask = () => {
+    
+  }
   return (
     <div className='Todo'>
-      <p>{task}</p>
-      {console.log(id, task, completed, isEditing)}
+      <p className={`${task.completed ? "completed" : "incompleted"}`} onClick={()=> completeTask(task.id)}>{task.task}</p>
       <div>
-        <FontAwesomeIcon icon={faPenToSquare} />
+        <FontAwesomeIcon icon={faPenToSquare} onClick={() => editTask(task.id)} />
         <FontAwesomeIcon icon={faTrash} />
       </div>
     </div>
