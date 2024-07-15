@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
+import {EditTodoForm } from "./EditTodoForm"
 import { v4 as uuidv4 } from "uuid";
 import { Todo } from "./Todo";
 
@@ -7,6 +8,7 @@ import { Todo } from "./Todo";
 
 export function TodoWrapper() {
   const [todoTasks, setTodoTasks] = useState([]);
+  const [editTaskMode, setEditTaskMode] = useState(false);
 
   const addTodo = (task) => {
     setTodoTasks([
@@ -23,13 +25,16 @@ export function TodoWrapper() {
   }
 
   const editTask = (id) => {
-    
+    console.log(id);
+    setEditTaskMode(true);
   }
 
   return (
     <div className="TodoWrapper">
       <TodoForm addTodo={addTodo} />
-      {todoTasks.map((task) => 
+      { todoTasks.map((task) => 
+      editTaskMode ? 
+      <EditTodoForm task={task} /> :
       <Todo
           task={task} key={task.id} completeTask={completeTask} editTask={editTask}
         />
