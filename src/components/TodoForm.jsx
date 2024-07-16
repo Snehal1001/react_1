@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
-export function TodoForm ({ addTodo }) {
-  const [task, setTask] = useState('');
+export function TodoForm({ addTodo }) {
+  const [taskDescription, setTaskDescription] = useState("");
 
   const handleChange = (e) => {
-    setTask(e.target.value)
-  }
+    setTaskDescription(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(task)
-    setTask('');
-  }
+    addTodo(taskDescription);
+    setTaskDescription("");
+  };
 
   return (
     <>
@@ -21,10 +21,12 @@ export function TodoForm ({ addTodo }) {
           className="todo-input"
           placeholder="What is the task today?"
           onChange={handleChange}
-          value={task}
+          value={taskDescription}
         />
-        <button type="submit" className="todo-btn">Add task</button>
+        <button type="submit" className="todo-btn">
+          Add task
+        </button>
       </form>
     </>
   );
-};
+}

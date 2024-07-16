@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
-import {EditTodoForm } from "./EditTodoForm"
+import { EditTodoForm } from "./EditTodoForm";
 import { v4 as uuidv4 } from "uuid";
 import { Todo } from "./Todo";
 
@@ -8,37 +8,61 @@ import { Todo } from "./Todo";
 
 export function TodoWrapper() {
   const [todoTasks, setTodoTasks] = useState([]);
-  const [editTaskMode, setEditTaskMode] = useState(false);
+  // const [editTaskMode, setEditTaskMode] = useState(false);
 
-  const addTodo = (task) => {
+  const addTodo = (taskDescription) => {
     setTodoTasks([
       ...todoTasks,
-      { id: uuidv4(), task: task, completed: false, isEditing: false },
+      {
+        id: uuidv4(),
+        taskDescription: taskDescription,
+        completed: false,
+        isEditing: false,
+      },
     ]);
   };
 
-  const completeTask = (id) => {
-    console.log(id);
-    setTodoTasks(
-      todoTasks.map((task) => task.id === id ? { ...task, completed: !task.completed } : task)
-    );
+  const updateTask = (updatedTask) => {
+    // setTodoTasks(
+    //   todoTasks.map((task) =>
+    //     task.id === updatedTask.id ? { ...task, completed: !task.completed } : task
+    //   )
+    // );
+
+    console.log('Wrapper ', 'updatedTask');
   }
 
+  const completeTask = (id) => {
+    setTodoTasks(
+      todoTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
   const editTask = (id) => {
-    console.log(id);
-    setEditTaskMode(true);
-  }
+    setTodoTasks(
+      todoTasks.map((task) =>
+        task.id === id ? { ...task, isEditing: !task.isEditing } : task
+      )
+    );
+  };
 
   return (
     <div className="TodoWrapper">
       <TodoForm addTodo={addTodo} />
-      { todoTasks.map((task) => 
-      editTaskMode ? 
-      <EditTodoForm task={task} /> :
-      <Todo
-          task={task} key={task.id} completeTask={completeTask} editTask={editTask}
-        />
+      {todoTasks.map((task) =>
+        task.isEditing ? (
+          <EditTodoForm task={task} key={task.id} updateTask={updateTask} />
+        ) : (
+          <Todo
+            task={task}
+            key={task.id}
+            completeTask={completeTask}
+            editTask={editTask}
+          />
+        )
       )}
     </div>
   );
-};
+}
