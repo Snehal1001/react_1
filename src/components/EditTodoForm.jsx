@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export const EditTodoForm = ({ task, updateTask }) => {
   const [editTask, setEditTask] = useState(task);
 
   const taskChange = (changeTask) => {
-    setEditTask((task) => ({
+    setEditTask({
       ...task,
       taskDescription: changeTask,
-    }));
+    });
   };
-
-  useEffect(() => {
-    setEditTask(task.taskDescription), [task.taskDescription];
-  });
 
   const handleUpdateTask = (e) => {
     e.preventDefault();
-    // updateTask(task);
-    setEditTask((task) => ({
-      ...task,
-      isEditing: false,
-    }));
-    console.log('Edit', task);
-  }
+    updateTask(editTask);
+  };
+
+  const focusInput = () => {
+    debugger;
+    if (inputRef.current) {
+    }
+    inputRef.focus();
+  };
 
   return (
     <form onSubmit={handleUpdateTask}>

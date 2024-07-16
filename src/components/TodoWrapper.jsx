@@ -23,13 +23,11 @@ export function TodoWrapper() {
   };
 
   const updateTask = (updatedTask) => {
-    // setTodoTasks(
-    //   todoTasks.map((task) =>
-    //     task.id === updatedTask.id ? { ...task, completed: !task.completed } : task
-    //   )
-    // );
-
-    console.log('Wrapper ', 'updatedTask');
+    setTodoTasks(
+      todoTasks.map((task) =>
+        task.id === updatedTask.id ? { ...task, taskDescription: updatedTask.taskDescription, isEditing: !updatedTask.isEditing } : task
+      )
+    );
   }
 
   const completeTask = (id) => {
