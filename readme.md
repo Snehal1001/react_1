@@ -1,1 +1,3 @@
-# Todo List with react
+# Todo List
+
+This is basic react + vite project.
