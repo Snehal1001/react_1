@@ -25,10 +25,16 @@ export function TodoWrapper() {
   const updateTask = (updatedTask) => {
     setTodoTasks(
       todoTasks.map((task) =>
-        task.id === updatedTask.id ? { ...task, taskDescription: updatedTask.taskDescription, isEditing: !updatedTask.isEditing } : task
+        task.id === updatedTask.id
+          ? {
+              ...task,
+              taskDescription: updatedTask.taskDescription,
+              isEditing: !updatedTask.isEditing,
+            }
+          : task
       )
     );
-  }
+  };
 
   const completeTask = (id) => {
     setTodoTasks(
@@ -36,6 +42,10 @@ export function TodoWrapper() {
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
+  };
+
+  const deleteTask = (taskId) => {
+    setTodoTasks(todoTasks.filter((task) => task.id !== taskId));
   };
 
   const editTask = (id) => {
@@ -58,6 +68,7 @@ export function TodoWrapper() {
             key={task.id}
             completeTask={completeTask}
             editTask={editTask}
+            deleteTask={deleteTask}
           />
         )
       )}

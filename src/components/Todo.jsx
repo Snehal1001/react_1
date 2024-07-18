@@ -4,9 +4,6 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export function Todo({ task, deleteTask, editTask, completeTask }) {
-  // const editTask = () => {
-
-  // }
   return (
     <div className="Todo">
       <p
@@ -16,11 +13,13 @@ export function Todo({ task, deleteTask, editTask, completeTask }) {
         {task.taskDescription}
       </p>
       <div>
-        <FontAwesomeIcon
-          icon={faPenToSquare}
-          onClick={() => editTask(task.id)}
-        />
-        <FontAwesomeIcon icon={faTrash} />
+        {!task.completed && (
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            onClick={() => editTask(task.id)}
+          />
+        )}
+        <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask(task.id)} />
       </div>
     </div>
   );
